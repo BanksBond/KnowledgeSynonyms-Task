@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Afacad+Flux&family=Poppins:wght@400;500;600;700;800;900&family=Ubuntu:wght@300;400;700&display=swap");
+
+.ubuntu-light {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.ubuntu-regular {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.ubuntu-bold {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Remove the default calendar icon */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: hidden;
+}
+
+/* Add a custom white calendar icon */
+input[type="date"] {
+  position: relative;
+}
+
+input[type="date"]::before {
+  content: "";
+  position: absolute;
+  right: 10px; /* Position the icon inside the input */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="%23FFFFFF" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2zm0 16H5V9h14v11zM7 11h5v5H7v-5z"/></svg>')
+    no-repeat center;
+  background-size: contain;
+  pointer-events: none;
+}
