@@ -1,5 +1,24 @@
 /* eslint-disable react/prop-types */
-function Form({ handleSubmit, formData, handleChange, isLoading }) {
+
+type FormProps = {
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  formData: {
+    firstname: string;
+    lastname: string;
+    totalprice: number | null;
+    depositpaid: boolean;
+    bookingdates: { checkin: string; checkout: string };
+    additionalneeds: string;
+  };
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isLoading: boolean;
+};
+const Form: React.FC<FormProps> = ({
+  handleSubmit,
+  formData,
+  handleChange,
+  isLoading,
+}) => {
   return (
     <form className="space-y-4" onSubmit={handleSubmit}>
       <div className="flex flex-row gap-4">
@@ -35,7 +54,7 @@ function Form({ handleSubmit, formData, handleChange, isLoading }) {
           name="totalprice"
           placeholder="Total Price"
           type="number"
-          value={formData.totalprice}
+          value={formData.totalprice?.toString() || ""}
           onChange={handleChange}
           required
         />
@@ -127,6 +146,6 @@ function Form({ handleSubmit, formData, handleChange, isLoading }) {
       </button>
     </form>
   );
-}
+};
 
 export default Form;

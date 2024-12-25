@@ -1,7 +1,11 @@
 import { useLocation } from "react-router-dom";
+import { ReactNode } from "react";
 
-// eslint-disable-next-line react/prop-types
-function Background({ children }) {
+interface BackgroundProps {
+  children: ReactNode;
+}
+
+function Background({ children }: BackgroundProps) {
   const location = useLocation(); // Get the current location
   const currPage = location.pathname;
   const isListPage = currPage === "/list"; // Check if the path is "/list"

@@ -1,5 +1,13 @@
-// eslint-disable-next-line react/prop-types
-const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+type PaginationProps = {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+};
+const Pagination: React.FC<PaginationProps> = ({
+  currentPage,
+  totalPages,
+  onPageChange,
+}) => {
   const generatePagination = () => {
     const pagination = [];
 

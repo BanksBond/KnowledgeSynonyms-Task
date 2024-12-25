@@ -3,7 +3,16 @@ import { useParams, useNavigate } from "react-router-dom";
 import Form from "../components/Form";
 import TetrisLoader from "../components/TetrisLoader";
 
-function EditBooking() {
+type formDataType = {
+  firstname: string;
+  lastname: string;
+  totalprice: number;
+  depositpaid: boolean;
+  bookingdates: { checkin: string; checkout: string };
+  additionalneeds: string;
+};
+
+const EditBooking: React.FC = () => {
   // Extract the booking ID from the URL parameters
   const { id } = useParams();
   // Hook to navigate between routes programmatically
@@ -17,7 +26,7 @@ function EditBooking() {
     depositpaid: false,
     bookingdates: { checkin: "", checkout: "" },
     additionalneeds: "",
-  });
+  } as formDataType);
 
   // State to manage loading state
   const [loading, setLoading] = useState(true);
@@ -40,7 +49,7 @@ function EditBooking() {
           setError("Failed to fetch booking details"); // Handle failed responses
           setLoading(false);
         }
-      } catch (err) {
+      } catch (err: any) {
         setError("Error fetching booking: " + err.message); // Handle errors from the API call
         setLoading(false);
       }
@@ -50,7 +59,7 @@ function EditBooking() {
   }, [id]); // Re-run the effect if the ID changes
 
   // Update the form data when a user modifies any input field
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     if (name === "checkin" || name === "checkout") {
       // Update nested booking dates
@@ -71,7 +80,7 @@ function EditBooking() {
   };
 
   // Handle form submission
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevent default form submission
     setLoading(true); // Show loading spinner during API call
     try {
@@ -95,7 +104,7 @@ function EditBooking() {
         setError("Failed to update booking. Please try again."); // Handle failed responses
         setLoading(false);
       }
-    } catch (err) {
+    } catch (err: any) {
       setError("Error updating booking: " + err.message); // Handle errors during the API call
       setLoading(false);
     }
@@ -143,6 +152,6 @@ function EditBooking() {
       </div>
     </div>
   );
-}
+};
 
 export default EditBooking;

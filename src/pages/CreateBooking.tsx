@@ -1,12 +1,24 @@
 import { useState } from "react";
 import Form from "../components/Form";
 
+type FormData = {
+  firstname: string;
+  lastname: string;
+  totalprice: number | null;
+  depositpaid: boolean;
+  bookingdates: {
+    checkin: string;
+    checkout: string;
+  };
+  additionalneeds: string;
+};
+
 function CreateBooking() {
   // State to hold form data for the booking
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
-    totalprice: "",
+    totalprice: null,
     depositpaid: false,
     bookingdates: {
       checkin: "",
@@ -22,7 +34,7 @@ function CreateBooking() {
   const [loading, setLoading] = useState(false);
 
   // Function to handle input changes and update the corresponding state
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, checked } = e.target;
 
     if (name === "depositpaid") {
@@ -41,7 +53,7 @@ function CreateBooking() {
   };
 
   // Function to handle form submission
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true); // Set loading state to true while processing
 
@@ -71,7 +83,7 @@ function CreateBooking() {
         setMessage("Failed to create booking: " + result.message);
         setLoading(false);
       }
-    } catch (error) {
+    } catch (error: any) {
       // Handle network or unexpected errors
       setMessage("Error: " + error.message);
       setLoading(false);
@@ -79,7 +91,7 @@ function CreateBooking() {
   };
 
   // Function to copy the booking ID to the clipboard
-  const handleCopy = (id) => {
+  const handleCopy = (id: string): void => {
     navigator.clipboard
       .writeText(id)
       .then(() => {
@@ -87,7 +99,7 @@ function CreateBooking() {
           "Booking ID copied to clipboard! You can go paste ID in Booking List's Search Bar"
         );
       })
-      .catch((err) => {
+      .catch((err: Error) => {
         console.error("Failed to copy text: ", err);
       });
   };

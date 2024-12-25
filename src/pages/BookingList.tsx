@@ -4,15 +4,19 @@ import Pagination from "../Pagination";
 import TetrisLoader from "../components/TetrisLoader";
 import { FaSearch } from "react-icons/fa";
 
+type Booking = {
+  bookingid: number;
+};
+
 function BookingsList() {
   // State to store the list of bookings fetched from the server
-  const [bookings, setBookings] = useState([]);
+  const [bookings, setBookings] = useState<Booking[]>([]);
 
   // State to store the search term entered by the user
   const [searchTerm, setSearchTerm] = useState("");
 
   // State to manage the current page in pagination
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   // Number of items to display per page
   const [itemsPerPage] = useState(6);
@@ -41,7 +45,7 @@ function BookingsList() {
           setError("Failed to fetch bookings");
           setLoading(false);
         }
-      } catch (err) {
+      } catch (err: any) {
         // Handle network or unexpected errors
         setError("Error fetching bookings: " + err.message);
         setLoading(false);
@@ -52,7 +56,7 @@ function BookingsList() {
   }, []);
 
   // Function to update the current page in pagination
-  const handlePageChange = (page) => {
+  const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
